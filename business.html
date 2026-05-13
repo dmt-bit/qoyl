@@ -1,0 +1,547 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Qoyl for Brands — Hair Intelligence Platform</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bronze:#9C7B5A;--bronze2:#C4A882;--sand:#D4C4AD;
+  --cream:#F5F0EA;--warm:#EDE5D8;--dark:#1C1612;--mid:#3D2E22;
+  --muted:#7A6A5A;--green:#4A7C59;--amber:#BA7517;
+  --white:#FFFFFF;--offwhite:#F9F8F5;--border:#E8E4DF;
+}
+html,body{font-family:'DM Sans',sans-serif;font-size:14px;color:var(--dark);background:#fff;line-height:1.6}
+a{text-decoration:none;color:inherit}
+
+/* NAV */
+nav{background:var(--dark);padding:14px 40px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100}
+.nav-logo{font-family:'Cormorant Garamond',serif;font-size:20px;font-weight:400;color:var(--cream);letter-spacing:-0.3px}
+.nav-logo span{color:var(--bronze)}
+.nav-sub{font-size:10px;color:#5F5E5A;font-family:'DM Sans',sans-serif;margin-left:8px;letter-spacing:0.08em}
+.nav-links{display:flex;gap:24px;align-items:center}
+.nav-links a{font-size:11px;color:var(--bronze2);letter-spacing:0.04em;transition:color 0.2s}
+.nav-links a:hover{color:var(--cream)}
+.nav-btn{background:var(--bronze);color:var(--cream);border:none;border-radius:6px;padding:6px 16px;font-size:11px;font-weight:500;cursor:pointer;font-family:'DM Sans',sans-serif;transition:background 0.2s}
+.nav-btn:hover{background:#8B6B4A}
+.nav-consumer{font-size:10px;color:#444441;letter-spacing:0.06em;transition:color 0.2s}
+.nav-consumer:hover{color:var(--bronze2)}
+
+/* HERO */
+.hero{background:var(--dark);padding:64px 40px 56px;display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:center;min-height:520px}
+.hero-eyebrow{font-size:10px;letter-spacing:0.18em;color:var(--bronze);text-transform:uppercase;margin-bottom:14px;display:flex;align-items:center;gap:10px}
+.hero-eyebrow::before{content:'';display:block;width:28px;height:1px;background:var(--bronze)}
+.hero-h{font-family:'Cormorant Garamond',serif;font-size:38px;font-weight:300;color:var(--cream);line-height:1.1;margin-bottom:18px}
+.hero-h em{color:var(--bronze);font-style:italic}
+.hero-p{font-size:13px;color:var(--bronze2);line-height:1.75;margin-bottom:28px;max-width:420px;font-weight:300}
+.hero-ctas{display:flex;gap:12px;flex-wrap:wrap}
+.btn-primary{background:var(--bronze);color:var(--cream);border:none;border-radius:8px;padding:11px 24px;font-size:12px;font-weight:500;cursor:pointer;font-family:'DM Sans',sans-serif;transition:background 0.2s}
+.btn-primary:hover{background:#8B6B4A}
+.btn-ghost{background:transparent;color:var(--bronze2);border:1px solid #3D2E22;border-radius:8px;padding:11px 24px;font-size:12px;cursor:pointer;font-family:'DM Sans',sans-serif;transition:border-color 0.2s,color 0.2s}
+.btn-ghost:hover{border-color:#9C7B5A;color:var(--cream)}
+
+/* Dashboard preview */
+.dash-preview{background:#2A2018;border-radius:14px;border:1px solid #3D2E22;padding:18px;overflow:hidden}
+.dp-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px}
+.dp-title{font-size:11px;color:var(--bronze2);font-weight:500;letter-spacing:0.04em}
+.dp-live{display:flex;align-items:center;gap:5px;font-size:9px;color:var(--green)}
+.dp-live::before{content:'';display:block;width:5px;height:5px;border-radius:50%;background:var(--green)}
+.dp-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:14px}
+.dp-stat{background:#1C1612;border-radius:8px;padding:10px;text-align:center}
+.dp-num{font-family:'Cormorant Garamond',serif;font-size:22px;color:var(--bronze);font-weight:400}
+.dp-lbl{font-size:9px;color:#5F5E5A;margin-top:2px;line-height:1.3}
+.dp-section-label{font-size:9px;color:#5F5E5A;letter-spacing:0.06em;margin-bottom:6px}
+.dp-bar-row{display:flex;flex-direction:column;gap:5px;margin-bottom:14px}
+.dp-bar-item{display:flex;align-items:center;gap:7px}
+.dp-bar-label{font-size:9px;color:#7A6A5A;width:52px;flex-shrink:0}
+.dp-bar-track{flex:1;height:4px;background:#3D2E22;border-radius:2px}
+.dp-bar-fill{height:100%;border-radius:2px;background:var(--bronze);transition:width 0.6s ease}
+.dp-bar-val{font-size:9px;color:var(--bronze2);width:26px;text-align:right;flex-shrink:0}
+.dp-insight{background:#1C1612;border-radius:8px;padding:9px 11px;margin-bottom:12px}
+.dp-insight-label{font-size:8px;color:#5F5E5A;text-transform:uppercase;letter-spacing:0.08em;margin-bottom:3px}
+.dp-insight-text{font-size:10px;color:var(--amber);line-height:1.45}
+.dp-lock{border-top:1px solid #3D2E22;padding-top:10px;display:flex;align-items:center;justify-content:center;gap:6px}
+.dp-lock svg{opacity:0.4}
+.dp-lock-txt{font-size:9px;color:#444441}
+
+/* STAT STRIP */
+.stat-strip{background:var(--cream);border-top:1px solid var(--sand);border-bottom:1px solid var(--sand);display:grid;grid-template-columns:repeat(4,1fr);text-align:center;padding:28px 40px}
+.strip-num{font-family:'Cormorant Garamond',serif;font-size:28px;color:var(--bronze);font-weight:300}
+.strip-lbl{font-size:10px;color:var(--muted);margin-top:4px;line-height:1.45;max-width:140px;margin-left:auto;margin-right:auto}
+.strip-divider{border-left:1px solid var(--sand)}
+
+/* SECTIONS */
+.section{padding:56px 40px;background:var(--white)}
+.section.alt{background:var(--offwhite)}
+.section-eyebrow{font-size:10px;letter-spacing:0.18em;color:var(--bronze);text-transform:uppercase;margin-bottom:10px;display:flex;align-items:center;gap:8px}
+.section-eyebrow::before{content:'';display:block;width:20px;height:1px;background:var(--bronze)}
+.section-h{font-family:'Cormorant Garamond',serif;font-size:28px;font-weight:300;color:var(--dark);margin-bottom:10px;line-height:1.2}
+.section-p{font-size:13px;color:var(--muted);line-height:1.75;max-width:560px;margin-bottom:32px;font-weight:300}
+
+/* FEATURES */
+.feat-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border);border:1px solid var(--border);border-radius:12px;overflow:hidden}
+.feat-card{background:var(--white);padding:24px;transition:background 0.2s}
+.feat-card:hover{background:var(--offwhite)}
+.feat-num{font-family:'Cormorant Garamond',serif;font-size:32px;color:var(--sand);font-weight:300;margin-bottom:12px;line-height:1}
+.feat-title{font-size:13px;font-weight:500;color:var(--dark);margin-bottom:7px}
+.feat-desc{font-size:12px;color:var(--muted);line-height:1.65;font-weight:300}
+.feat-tag{display:inline-block;margin-top:10px;font-size:10px;color:var(--bronze);background:var(--cream);border-radius:4px;padding:2px 8px;letter-spacing:0.04em}
+
+/* HOW IT WORKS */
+.steps{display:grid;grid-template-columns:repeat(4,1fr);gap:0;border:1px solid var(--border);border-radius:12px;overflow:hidden}
+.step{padding:24px;background:var(--white);border-right:1px solid var(--border)}
+.step:last-child{border-right:none}
+.step-num{font-family:'Cormorant Garamond',serif;font-size:36px;color:var(--sand);font-weight:300;margin-bottom:10px;line-height:1}
+.step-title{font-size:13px;font-weight:500;color:var(--dark);margin-bottom:7px}
+.step-desc{font-size:12px;color:var(--muted);line-height:1.65;font-weight:300}
+.step-arrow{font-size:20px;color:var(--sand);margin-top:12px}
+
+/* CREDIBILITY */
+.cred-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px}
+.cred-col{display:flex;flex-direction:column;gap:0}
+.cred-item{padding:16px 0;border-bottom:1px solid var(--border);display:flex;gap:12px;align-items:flex-start}
+.cred-item:last-child{border-bottom:none}
+.cred-dot{width:6px;height:6px;border-radius:50%;background:var(--bronze);margin-top:6px;flex-shrink:0}
+.cred-text{font-size:12px;color:var(--muted);line-height:1.7;font-weight:300}
+.cred-text strong{color:var(--dark);font-weight:500}
+
+/* PRICING */
+.tier-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.tier-card{border:1px solid var(--border);border-radius:12px;overflow:hidden;background:var(--white);display:flex;flex-direction:column}
+.tier-card.featured{border-color:var(--bronze);border-width:2px}
+.tier-head{padding:20px 20px 16px;border-bottom:1px solid var(--border)}
+.tier-badge{display:inline-block;font-size:9px;background:var(--cream);color:#633806;border-radius:4px;padding:2px 8px;margin-bottom:8px;letter-spacing:0.04em}
+.tier-name{font-size:10px;font-weight:500;color:var(--muted);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:8px}
+.tier-price{font-family:'Cormorant Garamond',serif;font-size:26px;font-weight:300;color:var(--dark)}
+.tier-period{font-size:11px;color:var(--muted)}
+.tier-features{padding:18px 20px;flex:1;display:flex;flex-direction:column;gap:9px}
+.tier-feat{display:flex;align-items:flex-start;gap:8px;font-size:12px;color:var(--muted);font-weight:300;line-height:1.5}
+.tier-feat::before{content:'';display:block;width:5px;height:5px;border-radius:50%;background:var(--bronze);margin-top:5px;flex-shrink:0}
+.tier-cta{padding:0 20px 20px}
+.tier-btn{width:100%;background:var(--dark);color:var(--cream);border:none;border-radius:8px;padding:10px;font-size:12px;font-weight:500;cursor:pointer;font-family:'DM Sans',sans-serif;transition:background 0.2s}
+.tier-btn:hover{background:#2C2420}
+.tier-btn.outline{background:transparent;color:var(--dark);border:1px solid var(--border);transition:border-color 0.2s}
+.tier-btn.outline:hover{border-color:var(--bronze)}
+
+/* LOGIN GATE */
+.login-section{background:var(--dark);padding:64px 40px;display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:center}
+.login-left h2{font-family:'Cormorant Garamond',serif;font-size:32px;font-weight:300;color:var(--cream);margin-bottom:14px;line-height:1.15}
+.login-left p{font-size:12px;color:var(--bronze2);line-height:1.75;margin-bottom:24px;font-weight:300}
+.login-perks{display:flex;flex-direction:column;gap:10px}
+.login-perk{display:flex;align-items:center;gap:10px;font-size:12px;color:#888780}
+.login-perk::before{content:'';display:block;width:5px;height:5px;border-radius:50%;background:var(--bronze);flex-shrink:0}
+.login-card{background:#2A2018;border:1px solid #3D2E22;border-radius:14px;padding:28px}
+.login-card h3{font-family:'Cormorant Garamond',serif;font-size:20px;font-weight:400;color:var(--cream);margin-bottom:4px}
+.login-card p{font-size:11px;color:#5F5E5A;margin-bottom:22px}
+.form-group{margin-bottom:14px}
+.form-label{font-size:10px;color:#5F5E5A;letter-spacing:0.08em;text-transform:uppercase;margin-bottom:5px;display:block}
+.form-input{width:100%;background:#1C1612;border:1px solid #3D2E22;border-radius:7px;padding:10px 13px;color:var(--cream);font-size:12px;font-family:'DM Sans',sans-serif;outline:none;transition:border-color 0.2s}
+.form-input:focus{border-color:var(--bronze)}
+.form-input::placeholder{color:#3D2E22}
+.form-submit{width:100%;background:var(--bronze);color:var(--cream);border:none;border-radius:8px;padding:11px;font-size:12px;font-weight:500;cursor:pointer;font-family:'DM Sans',sans-serif;transition:background 0.2s;margin-top:4px}
+.form-submit:hover{background:#8B6B4A}
+.form-divider{text-align:center;font-size:10px;color:#3D2E22;margin:12px 0}
+.form-demo{width:100%;background:transparent;color:var(--bronze2);border:1px solid #3D2E22;border-radius:8px;padding:10px;font-size:11px;cursor:pointer;font-family:'DM Sans',sans-serif;transition:border-color 0.2s}
+.form-demo:hover{border-color:var(--bronze)}
+.form-footer{text-align:center;font-size:10px;color:#3D2E22;margin-top:12px}
+.form-footer a{color:var(--bronze);cursor:pointer}
+
+/* FOOTER */
+footer{background:#0F0D0B;padding:24px 40px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px}
+.footer-logo{font-family:'Cormorant Garamond',serif;font-size:16px;color:var(--bronze)}
+.footer-links{display:flex;gap:20px}
+.footer-links a{font-size:10px;color:#3D2E22;letter-spacing:0.04em;transition:color 0.2s}
+.footer-links a:hover{color:var(--bronze)}
+.footer-note{font-size:10px;color:#2C2C2A}
+
+/* DIVIDER */
+.section-divider{text-align:center;padding:14px 40px;border-top:1px solid var(--border)}
+.divider-label{font-size:10px;color:#B4B2A9;letter-spacing:0.14em;text-transform:uppercase}
+
+@media(max-width:900px){
+  .hero,.login-section{grid-template-columns:1fr}
+  .hero{padding:40px 24px}
+  .feat-grid,.tier-grid{grid-template-columns:1fr}
+  .steps{grid-template-columns:1fr 1fr}
+  .stat-strip{grid-template-columns:1fr 1fr;padding:24px}
+  nav,.section,.section.alt,.section-divider,footer{padding-left:24px;padding-right:24px}
+  .cred-grid{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div style="display:flex;align-items:center">
+    <div class="nav-logo">Q<span>oyl</span></div>
+    <span class="nav-sub">for brands</span>
+  </div>
+  <div class="nav-links">
+    <a href="#features">features</a>
+    <a href="#pricing">pricing</a>
+    <a href="#api">api docs</a>
+    <a href="#login">log in</a>
+    <button class="nav-btn" onclick="document.getElementById('login').scrollIntoView({behavior:'smooth'})">request access</button>
+    <a href="/" class="nav-consumer">consumer app →</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div>
+    <div class="hero-eyebrow">Brand intelligence platform</div>
+    <h1 class="hero-h">The consumer hair data<br>your R&D team<br><em>has never had access to.</em></h1>
+    <p class="hero-p">Qoyl turns real-world consumer hair data into ingredient intelligence, formulation gaps, and trend signals — updated continuously as consumers use the platform.</p>
+    <div class="hero-ctas">
+      <button class="btn-primary" onclick="document.getElementById('login').scrollIntoView({behavior:'smooth'})">Request a demo</button>
+      <button class="btn-ghost" onclick="document.getElementById('pricing').scrollIntoView({behavior:'smooth'})">View pricing</button>
+    </div>
+  </div>
+  <div class="dash-preview">
+    <div class="dp-header">
+      <div class="dp-title">Brand dashboard preview</div>
+      <div class="dp-live">live data</div>
+    </div>
+    <div class="dp-stats">
+      <div class="dp-stat"><div class="dp-num">4,821</div><div class="dp-lbl">consumer profiles</div></div>
+      <div class="dp-stat"><div class="dp-num">89%</div><div class="dp-lbl">match accuracy</div></div>
+      <div class="dp-stat"><div class="dp-num">312</div><div class="dp-lbl">product scans</div></div>
+    </div>
+    <div class="dp-section-label">top hair types scanning your products</div>
+    <div class="dp-bar-row">
+      <div class="dp-bar-item"><div class="dp-bar-label">4c coily</div><div class="dp-bar-track"><div class="dp-bar-fill" style="width:78%"></div></div><div class="dp-bar-val">78%</div></div>
+      <div class="dp-bar-item"><div class="dp-bar-label">3b curly</div><div class="dp-bar-track"><div class="dp-bar-fill" style="width:61%"></div></div><div class="dp-bar-val">61%</div></div>
+      <div class="dp-bar-item"><div class="dp-bar-label">4a coily</div><div class="dp-bar-track"><div class="dp-bar-fill" style="width:45%"></div></div><div class="dp-bar-val">45%</div></div>
+      <div class="dp-bar-item"><div class="dp-bar-label">3c curly</div><div class="dp-bar-track"><div class="dp-bar-fill" style="width:38%"></div></div><div class="dp-bar-val">38%</div></div>
+    </div>
+    <div class="dp-insight">
+      <div class="dp-insight-label">formulation gap detected</div>
+      <div class="dp-insight-text">34% of 4c high-porosity users find no product in your range scoring above amber. Opportunity: protein-forward sealant for coily hair.</div>
+    </div>
+    <div class="dp-lock">
+      <svg width="12" height="12" viewBox="0 0 16 16" fill="none" stroke="#5F5E5A" stroke-width="1.5"><rect x="3" y="7" width="10" height="8" rx="2"/><path d="M5 7V5a3 3 0 016 0v2"/></svg>
+      <div class="dp-lock-txt">full data available after login</div>
+    </div>
+  </div>
+</section>
+
+<!-- STAT STRIP -->
+<div class="stat-strip">
+  <div><div class="strip-num">250+</div><div class="strip-lbl">scientifically verified ingredients in the database</div></div>
+  <div class="strip-divider"><div class="strip-num">21</div><div class="strip-lbl">ingredient categories mapped and scored</div></div>
+  <div class="strip-divider"><div class="strip-num">1a–4c</div><div class="strip-lbl">full hair type spectrum with porosity scoring</div></div>
+  <div class="strip-divider"><div class="strip-num">3</div><div class="strip-lbl">brand tiers from indie to enterprise R&D</div></div>
+</div>
+
+<!-- FEATURES -->
+<div class="section-divider"><span class="divider-label">what you get</span></div>
+<section class="section" id="features">
+  <div class="section-eyebrow">dashboard features</div>
+  <h2 class="section-h">Intelligence your formulation team can act on.</h2>
+  <p class="section-p">Every feature in the Qoyl brand dashboard is built from real consumer interactions — not survey data, not panels, not estimates.</p>
+  <div class="feat-grid">
+    <div class="feat-card">
+      <div class="feat-num">01</div>
+      <div class="feat-title">Ingredient intelligence</div>
+      <div class="feat-desc">See exactly how your formulation's ingredients score across hair types, porosity levels, and scalp conditions in your target segment. Built from the same algorithm powering consumer recommendations.</div>
+      <span class="feat-tag">all tiers</span>
+    </div>
+    <div class="feat-card">
+      <div class="feat-num">02</div>
+      <div class="feat-title">Consumer segment data</div>
+      <div class="feat-desc">Drill into which specific hair type, porosity, and scalp condition combinations are scanning and recommending your products — and which ones are flagging concerns.</div>
+      <span class="feat-tag">growth +</span>
+    </div>
+    <div class="feat-card">
+      <div class="feat-num">03</div>
+      <div class="feat-title">Formulation gap analysis</div>
+      <div class="feat-desc">Identify underserved consumer segments — profiles with no well-matched product in your current range, quantified and ranked. The product brief your R&D team couldn't write without this data.</div>
+      <span class="feat-tag">growth +</span>
+    </div>
+    <div class="feat-card">
+      <div class="feat-num">04</div>
+      <div class="feat-title">Trend signals</div>
+      <div class="feat-desc">Track which ingredients consumers are searching, flagging, and avoiding in real time. Updated as the community uses Qoyl daily — not a quarterly report.</div>
+      <span class="feat-tag">all tiers</span>
+    </div>
+    <div class="feat-card">
+      <div class="feat-num">05</div>
+      <div class="feat-title">Product benchmarking</div>
+      <div class="feat-desc">Compare your product's compatibility scores against anonymised category averages. See where you lead, where you lose, and what formulation changes would shift the score.</div>
+      <span class="feat-tag">growth +</span>
+    </div>
+    <div class="feat-card">
+      <div class="feat-num">06</div>
+      <div class="feat-title">API access</div>
+      <div class="feat-desc">Pull Qoyl data directly into internal pipelines, product development tools, and retail assortment systems. Custom cohort queries, trend forecasting, and dedicated account support.</div>
+      <span class="feat-tag">enterprise</span>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section class="section alt">
+  <div class="section-eyebrow">how it works</div>
+  <h2 class="section-h">Your data improves every day the platform grows.</h2>
+  <p class="section-p">Qoyl's consumer platform collects structured outcome data from day one. The more consumers use it, the richer the brand intelligence becomes.</p>
+  <div class="steps">
+    <div class="step">
+      <div class="step-num">01</div>
+      <div class="step-title">Consumers build profiles</div>
+      <div class="step-desc">Hair type, porosity, scalp condition, thickness, climate, and water hardness — captured at onboarding and updated over time.</div>
+      <div class="step-arrow">→</div>
+    </div>
+    <div class="step">
+      <div class="step-num">02</div>
+      <div class="step-title">Products get scanned</div>
+      <div class="step-desc">Consumers paste ingredient lists. Every scan resolves to structured ingredient data and logs a compatibility result against their profile.</div>
+      <div class="step-arrow">→</div>
+    </div>
+    <div class="step">
+      <div class="step-num">03</div>
+      <div class="step-title">Outcomes are logged</div>
+      <div class="step-desc">After each wash day, consumers log moisture, protein, and scalp results. Every log is a labeled data point — real signal, not sentiment.</div>
+      <div class="step-arrow">→</div>
+    </div>
+    <div class="step">
+      <div class="step-num">04</div>
+      <div class="step-title">Your dashboard updates</div>
+      <div class="step-desc">Brand dashboards reflect aggregate consumer behaviour across your product range — refreshed continuously as new data comes in.</div>
+    </div>
+  </div>
+</section>
+
+<!-- CREDIBILITY -->
+<section class="section">
+  <div class="section-eyebrow">why brands trust qoyl</div>
+  <h2 class="section-h">Algorithm-first integrity. Always.</h2>
+  <p class="section-p">Your products are never filtered in or out of recommendations based on your subscription tier. The algorithm scores every ingredient on science — partnership only accelerates our review of your formulations.</p>
+  <div class="cred-grid">
+    <div class="cred-col">
+      <div class="cred-item"><div class="cred-dot"></div><div class="cred-text"><strong>Built by a biochemist.</strong> Qoyl's ingredient database was designed by a systems engineer with professional experience in pharmaceutical and food industry formulation analysis.</div></div>
+      <div class="cred-item"><div class="cred-dot"></div><div class="cred-text"><strong>No editorial scoring.</strong> Every compatibility score is computed algorithmically from structured ingredient properties — porosity, molecular weight, solubility, pH range, and documented conflict pairs.</div></div>
+      <div class="cred-item"><div class="cred-dot"></div><div class="cred-text"><strong>Brand partners don't get special ratings.</strong> Paying for a dashboard gives you access to data about your product's performance — it does not change what that performance is.</div></div>
+    </div>
+    <div class="cred-col">
+      <div class="cred-item"><div class="cred-dot"></div><div class="cred-text"><strong>Real outcomes, not panels.</strong> Qoyl's data comes from consumers who actively use the platform and log their own results — not paid research participants answering surveys.</div></div>
+      <div class="cred-item"><div class="cred-dot"></div><div class="cred-text"><strong>ML roadmap at 1,000 users.</strong> At scale, Qoyl's collaborative filtering model will surface which specific product formulations generate the best real-world outcomes — across every hair type in the database.</div></div>
+      <div class="cred-item"><div class="cred-dot"></div><div class="cred-text"><strong>Consumer data is anonymised.</strong> Individual consumer profiles are never shared with brand partners. Dashboards surface aggregate patterns — never personally identifiable data.</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section class="section alt" id="pricing">
+  <div class="section-eyebrow">pricing</div>
+  <h2 class="section-h">Start small. Scale with your data needs.</h2>
+  <p class="section-p">Every tier includes full access to the ingredient compatibility database. Higher tiers unlock deeper consumer segmentation, formulation gap analysis, and API access.</p>
+
+  <!-- Billing toggle -->
+  <div style="display:flex;align-items:center;justify-content:center;gap:14px;margin-bottom:28px">
+    <span style="font-size:12px;color:var(--dark);font-weight:500" id="lbl-mo">Monthly</span>
+    <div id="billing-toggle" onclick="switchBilling()" style="width:44px;height:24px;background:var(--border);border-radius:12px;position:relative;cursor:pointer;transition:background 0.2s">
+      <div id="billing-thumb" style="position:absolute;width:18px;height:18px;background:#fff;border-radius:50%;top:3px;left:3px;transition:left 0.2s;box-shadow:0 1px 3px rgba(0,0,0,0.15)"></div>
+    </div>
+    <span style="font-size:12px;color:var(--muted)" id="lbl-yr">Annual <span id="save-badge" style="font-size:10px;background:#EAF3DE;color:#3B6D11;border-radius:4px;padding:2px 8px;margin-left:4px;font-weight:500;opacity:0.45">save 20%</span></span>
+  </div>
+
+  <div class="tier-grid">
+    <div class="tier-card">
+      <div class="tier-head">
+        <div class="tier-name">Early stage</div>
+        <div style="margin-top:6px">
+          <span class="tier-price" id="es-price">$250</span><span class="tier-period" id="es-period"> / month</span>
+          <div id="es-range" style="font-size:11px;color:var(--muted);margin-top:2px">– $500 / month</div>
+          <div id="es-annual" style="font-size:10px;color:#3B6D11;display:none;margin-top:3px">$2,400 – $4,800 billed annually</div>
+          <div id="es-was" style="font-size:10px;color:var(--sand);text-decoration:line-through;display:none">was $3,000 – $6,000 / year</div>
+        </div>
+      </div>
+      <div class="tier-features">
+        <div class="tier-feat">Ingredient compatibility scores for up to 5 SKUs</div>
+        <div class="tier-feat">Consumer trend snapshots — monthly refresh</div>
+        <div class="tier-feat">Hair type scan frequency overview</div>
+        <div class="tier-feat">1 dashboard seat · 30-day data history</div>
+        <div class="tier-feat" style="color:var(--muted);font-style:italic">Upgrades to $500/mo for 2 seats, 10 SKUs, CSV export</div>
+      </div>
+      <div class="tier-cta"><button class="tier-btn outline">get started</button></div>
+    </div>
+    <div class="tier-card featured">
+      <div class="tier-head">
+        <div class="tier-badge">most popular</div>
+        <div class="tier-name">Growth</div>
+        <div style="margin-top:6px">
+          <span class="tier-price" id="gr-price">$750</span><span class="tier-period" id="gr-period"> / month</span>
+          <div id="gr-range" style="font-size:11px;color:var(--muted);margin-top:2px">– $1,500 / month</div>
+          <div id="gr-annual" style="font-size:10px;color:#3B6D11;display:none;margin-top:3px">$7,200 – $14,400 billed annually</div>
+          <div id="gr-was" style="font-size:10px;color:var(--sand);text-decoration:line-through;display:none">was $9,000 – $18,000 / year</div>
+        </div>
+      </div>
+      <div class="tier-features">
+        <div class="tier-feat">Everything in Early stage ($500)</div>
+        <div class="tier-feat">Up to 15 SKUs scored · segmented insights</div>
+        <div class="tier-feat">Formulation gap analysis — top 3 gaps</div>
+        <div class="tier-feat">2 seats · 6-month data history</div>
+        <div class="tier-feat" style="color:var(--muted);font-style:italic">Upgrades to $1,500/mo for 30 SKUs, 5 seats, benchmarking</div>
+      </div>
+      <div class="tier-cta"><button class="tier-btn">get started</button></div>
+    </div>
+    <div class="tier-card">
+      <div class="tier-head">
+        <div class="tier-name">Enterprise / R&D</div>
+        <div style="margin-top:6px">
+          <span class="tier-price" id="en-price">$2,500</span><span class="tier-period" id="en-period"> / month</span>
+          <div id="en-range" style="font-size:11px;color:var(--muted);margin-top:2px">– $10,000 / month</div>
+          <div id="en-annual" style="font-size:10px;color:#3B6D11;display:none;margin-top:3px">$24,000 – $96,000 billed annually</div>
+          <div id="en-was" style="font-size:10px;color:var(--sand);text-decoration:line-through;display:none">was $30,000 – $120,000 / year</div>
+        </div>
+      </div>
+      <div class="tier-features">
+        <div class="tier-feat">Everything in Growth ($1,500)</div>
+        <div class="tier-feat">Unlimited SKU scoring · API access</div>
+        <div class="tier-feat">5 seats · full data history</div>
+        <div class="tier-feat">Trend forecasting reports quarterly</div>
+        <div class="tier-feat" style="color:var(--muted);font-style:italic">+$200/seat above 5 · custom cohorts · white-label reports</div>
+      </div>
+      <div class="tier-cta"><button class="tier-btn outline">contact sales</button></div>
+    </div>
+  </div>
+
+  <div style="margin-top:16px;font-size:11px;color:var(--muted);padding:12px 16px;border:1px solid var(--border);border-radius:8px;line-height:1.7;background:var(--white)">
+    <strong style="color:var(--dark)">Billing terms:</strong> Annual plans are billed upfront in full at 20% off monthly rates. Monthly plans are billed on the first of each month. Annual subscribers lock in their rate for 12 months. Brands can upgrade tiers at any time — the prorated difference applies to the next billing cycle. Downgrades take effect at renewal.
+  </div>
+</section>
+
+<!-- LOGIN GATE -->
+<section class="login-section" id="login">
+  <div class="login-left">
+    <h2>Your dashboard is<br>waiting for you.</h2>
+    <p>Log in to access your brand's ingredient performance data, consumer segment insights, and formulation gap reports — updated continuously as Qoyl grows.</p>
+    <div class="login-perks">
+      <div class="login-perk">Full ingredient compatibility scores for every SKU</div>
+      <div class="login-perk">Consumer scan frequency by hair type and porosity</div>
+      <div class="login-perk">Formulation gap analysis and R&D briefs</div>
+      <div class="login-perk">Trend signal reports updated weekly</div>
+    </div>
+  </div>
+  <div>
+    <div class="login-card">
+      <div style="text-align:center;margin-bottom:18px">
+        <div style="width:44px;height:44px;border-radius:50%;background:#3D2E22;display:flex;align-items:center;justify-content:center;margin:0 auto 10px">
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="#9C7B5A" stroke-width="1.5" stroke-linecap="round"><rect x="3" y="9" width="14" height="10" rx="2"/><path d="M6 9V6a4 4 0 018 0v3"/><circle cx="10" cy="14" r="1.5" fill="#9C7B5A" stroke="none"/></svg>
+        </div>
+        <h3 style="font-family:'Cormorant Garamond',serif;font-size:18px;font-weight:400;color:#F5F0EA;margin-bottom:4px">Dashboard access</h3>
+        <p style="font-size:11px;color:#5F5E5A;line-height:1.5">Currently invite-only during our launch phase</p>
+      </div>
+      <div style="background:#1C1612;border:1px solid #3D2E22;border-radius:8px;padding:14px 16px;margin-bottom:16px">
+        <div style="display:flex;align-items:center;gap:7px;margin-bottom:7px">
+          <div style="width:6px;height:6px;border-radius:50%;background:#BA7517;flex-shrink:0"></div>
+          <span style="font-size:10px;color:#BA7517;font-weight:500;letter-spacing:0.06em;text-transform:uppercase">Launch phase</span>
+        </div>
+        <p style="font-size:11px;color:#7A6A5A;line-height:1.65">The Qoyl brand dashboard is currently being built. We are onboarding early access partners now — brands who join early will help shape the product and receive preferred pricing at launch.</p>
+      </div>
+      <div id="access-form">
+        <div class="form-group">
+          <label class="form-label">brand name</label>
+          <input class="form-input" type="text" placeholder="your brand"/>
+        </div>
+        <div class="form-group">
+          <label class="form-label">email</label>
+          <input class="form-input" type="email" id="access-email" placeholder="brand@company.com"/>
+        </div>
+        <div class="form-group">
+          <label class="form-label">annual revenue (approx)</label>
+          <select class="form-input" style="cursor:pointer;color:#F5F0EA;background:#1C1612">
+            <option value="" disabled selected style="color:#3D2E22">select range</option>
+            <option>Under $500K — Early stage tier</option>
+            <option>$500K – $5M — Growth tier</option>
+            <option>$5M+ — Enterprise / R&D tier</option>
+          </select>
+        </div>
+        <button class="form-submit" onclick="handleAccessRequest()">Request early access</button>
+        <div class="form-footer" style="margin-top:12px">Already have an invite? <a onclick="showLogin()" style="color:#9C7B5A;cursor:pointer">Log in here</a></div>
+      </div>
+      <div id="access-success" style="display:none;text-align:center;padding:16px 0">
+        <div style="width:40px;height:40px;border-radius:50%;background:#1C3A28;display:flex;align-items:center;justify-content:center;margin:0 auto 12px">
+          <svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="#4A7C59" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l4 4 8-8"/></svg>
+        </div>
+        <p style="font-size:13px;color:#F5F0EA;font-weight:500;margin-bottom:6px">You're on the list.</p>
+        <p style="font-size:11px;color:#7A6A5A;line-height:1.65">We'll reach out with early access details as we approach launch. Brands who request access now will receive preferred pricing.</p>
+      </div>
+      <div id="login-form" style="display:none">
+        <div class="form-group">
+          <label class="form-label">email</label>
+          <input class="form-input" type="email" placeholder="brand@company.com"/>
+        </div>
+        <div class="form-group">
+          <label class="form-label">password</label>
+          <input class="form-input" type="password" placeholder="••••••••"/>
+        </div>
+        <button class="form-submit">Log in to dashboard</button>
+        <div class="form-footer" style="margin-top:12px"><a onclick="showAccessForm()" style="color:#9C7B5A;cursor:pointer">← Request early access instead</a></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">Qoyl</div>
+  <div class="footer-links">
+    <a href="/">consumer app</a>
+    <a href="#">privacy policy</a>
+    <a href="#" id="api">api documentation</a>
+    <a href="#">hello@qoyl.com</a>
+  </div>
+  <div class="footer-note">© 2025 Qoyl · @clubqoyl</div>
+</footer>
+
+<script>
+function handleAccessRequest(){
+  const email = document.getElementById('access-email').value.trim();
+  if(!email||!email.includes('@')){
+    document.getElementById('access-email').style.borderColor='#BA7517';
+    setTimeout(()=>document.getElementById('access-email').style.borderColor='',1400);
+    return;
+  }
+  document.getElementById('access-form').style.display='none';
+  document.getElementById('access-success').style.display='block';
+}
+function showLogin(){
+  document.getElementById('access-form').style.display='none';
+  document.getElementById('login-form').style.display='block';
+}
+function showAccessForm(){
+  document.getElementById('login-form').style.display='none';
+  document.getElementById('access-form').style.display='block';
+}
+function switchBilling(){
+  isAnnual = !isAnnual;
+  const tog = document.getElementById('billing-toggle');
+  const thumb = document.getElementById('billing-thumb');
+  const badge = document.getElementById('save-badge');
+  tog.style.background = isAnnual ? '#9C7B5A' : '#E8E4DF';
+  thumb.style.left = isAnnual ? '23px' : '3px';
+  badge.style.opacity = isAnnual ? '1' : '0.45';
+  document.getElementById('lbl-mo').style.cssText = isAnnual ? 'font-size:12px;color:var(--muted)' : 'font-size:12px;color:var(--dark);font-weight:500';
+  document.getElementById('lbl-yr').style.cssText = isAnnual ? 'font-size:12px;color:var(--dark);font-weight:500' : 'font-size:12px;color:var(--muted)';
+  const prices = {
+    'es-price': isAnnual ? '$200' : '$250',
+    'es-range': isAnnual ? '– $400 / month' : '– $500 / month',
+    'gr-price': isAnnual ? '$600' : '$750',
+    'gr-range': isAnnual ? '– $1,200 / month' : '– $1,500 / month',
+    'en-price': isAnnual ? '$2,000' : '$2,500',
+    'en-range': isAnnual ? '– $8,000 / month' : '– $10,000 / month',
+  };
+  Object.entries(prices).forEach(([id, val]) => { document.getElementById(id).textContent = val; });
+  ['es','gr','en'].forEach(t => {
+    document.getElementById(t+'-annual').style.display = isAnnual ? 'block' : 'none';
+    document.getElementById(t+'-was').style.display = isAnnual ? 'block' : 'none';
+  });
+}
+</script>
+</body>
+</html>
